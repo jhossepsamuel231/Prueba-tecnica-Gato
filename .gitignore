@@ -1,0 +1,14 @@
+# Laravel
+Laravel/prueba-tecnica/vendor/
+Laravel/prueba-tecnica/node_modules/
+Laravel/prueba-tecnica/storage/*.key
+Laravel/prueba-tecnica/.env
+
+# NestJS
+nestjs/prueba-tecnica/node_modules/
+nestjs/prueba-tecnica/dist/
+nestjs/prueba-tecnica/.env
+
+# Global
+*.log
+.env

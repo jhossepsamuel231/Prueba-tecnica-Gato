@@ -1,0 +1,10 @@
+# Dockerfile.dev
+FROM node:23-slim
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+# No copies todo el código — ya lo monta el volumen
+CMD ["npm", "run", "start:dev"]

@@ -1,0 +1,271 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Cuentas y Transacciones",
+        "description": "Documentación generada automáticamente con Swagger en Laravel 12",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/accounts": {
+            "get": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Lista todas las cuentas",
+                "operationId": "bdd2eea16c1e4dcac2b451558cad3744",
+                "responses": {
+                    "200": {
+                        "description": "Lista de cuentas"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Crea una nueva cuenta",
+                "operationId": "3c4be06f4e0b9c917e8d370cd91a8390",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "holder_name",
+                                    "document_number",
+                                    "account_type",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "holder_name": {
+                                        "type": "string"
+                                    },
+                                    "document_number": {
+                                        "type": "string"
+                                    },
+                                    "account_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "SAVINGS",
+                                            "CHECKING"
+                                        ]
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cuenta creada correctamente"
+                    }
+                }
+            }
+        },
+        "/api/accounts/{id}": {
+            "get": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Muestra una cuenta por ID",
+                "operationId": "5ff79b781e5f92b3149cd6d3d7e67091",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cuenta encontrada"
+                    }
+                }
+            }
+        },
+        "/api/transactions/deposit": {
+            "post": {
+                "tags": [
+                    "Transacciones"
+                ],
+                "summary": "Realiza un depósito en una cuenta",
+                "operationId": "edcdef1b5e788ccfec70eedf2bc46de3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "account_id",
+                                    "amount",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "account_id": {
+                                        "type": "integer"
+                                    },
+                                    "amount": {
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Depósito realizado"
+                    },
+                    "500": {
+                        "description": "Error al depositar"
+                    }
+                }
+            }
+        },
+        "/api/transactions/withdraw": {
+            "post": {
+                "tags": [
+                    "Transacciones"
+                ],
+                "summary": "Realiza un retiro de una cuenta",
+                "operationId": "309b8d1b7978d0e4745165bb1fc2ec6a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "account_id",
+                                    "amount",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "account_id": {
+                                        "type": "integer"
+                                    },
+                                    "amount": {
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Retiro realizado"
+                    },
+                    "400": {
+                        "description": "Saldo insuficiente"
+                    },
+                    "500": {
+                        "description": "Error al retirar"
+                    }
+                }
+            }
+        },
+        "/api/transactions/transfer": {
+            "post": {
+                "tags": [
+                    "Transacciones"
+                ],
+                "summary": "Realiza una transferencia entre cuentas",
+                "operationId": "4a7763ba2c31bf36424ee10f53e689a7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "account_id",
+                                    "destination_account_id",
+                                    "amount",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "account_id": {
+                                        "type": "integer"
+                                    },
+                                    "destination_account_id": {
+                                        "type": "integer"
+                                    },
+                                    "amount": {
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transferencia realizada"
+                    },
+                    "400": {
+                        "description": "Saldo insuficiente"
+                    },
+                    "500": {
+                        "description": "Error al transferir"
+                    }
+                }
+            }
+        },
+        "/api/transactions/{accountId}": {
+            "get": {
+                "tags": [
+                    "Transacciones"
+                ],
+                "summary": "Lista las transacciones de una cuenta",
+                "operationId": "cbe5543c9572d3e0bd2bf85399c9b206",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de transacciones"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cuentas",
+            "description": "Cuentas"
+        },
+        {
+            "name": "Transacciones",
+            "description": "Transacciones"
+        }
+    ]
+}
